@@ -1,5 +1,6 @@
 from datetime import datetime
-from projecttracker.extensions import db  # Adjust based on your project structure
+from projecttracker.extensions import db, ma
+
 
 class Project(db.Model):
     __tablename__ = "projects"
@@ -11,8 +12,8 @@ class Project(db.Model):
     start_date = db.Column(db.DateTime, nullable=False)
     expected_due = db.Column(db.DateTime, nullable=False)
     actual_due = db.Column(db.DateTime, default=None)
-    created_on = db.Column(db.DateTime, default=datetime.now)  # Fix `oncreate`
-    last_update = db.Column(db.DateTime, onupdate=datetime.now)  # Fix `onUpdate`
+    created_on = db.Column(db.DateTime, default=datetime.now)  
+    last_update = db.Column(db.DateTime, onupdate=datetime.now)  
 
     # One-to-many relationship
     # budget_items = db.relationship(

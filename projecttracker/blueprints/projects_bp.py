@@ -36,5 +36,6 @@ def create_project():
 
     new_project=Project(title=title, budget=budget, start_date=start_date, expected_due=expected_due)
     new_project.save()
+    # print(new_project)
 
     return jsonify({"new Project":new_project.id})
