@@ -35,6 +35,6 @@ def create_project():
         return jsonify({"message": "Missing required fields"}), 400
 
     new_project=Project(title=title, budget=budget, start_date=start_date, expected_due=expected_due)
-    # new_project.save()
+    new_project.save()
 
-    return jsonify({"new Project":new_project.title})
+    return jsonify({"new Project":new_project.id})
