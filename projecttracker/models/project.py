@@ -1,5 +1,6 @@
 from datetime import datetime
 from projecttracker.extensions import db, ma
+from projecttracker.models.budgetItems import BudgetItem
 
 
 class Project(db.Model):
@@ -16,11 +17,11 @@ class Project(db.Model):
     last_update = db.Column(db.DateTime, onupdate=datetime.now)  
 
     # One-to-many relationship
-    # budget_items = db.relationship(
-    #     'BudgetItem',
-    #     back_populates='project',
-    #     cascade='all, delete-orphan'
-    # )
+    budget_items = db.relationship(
+        'BudgetItem',
+        back_populates='project',
+        cascade='all, delete-orphan'
+    )
 
     def __init__(self, title, budget, start_date, expected_due):
         self.title = title
@@ -35,3 +36,12 @@ class Project(db.Model):
     def save(self):
         db.session.add(self)
         db.session.commit()
+        
+        
+class ProjectSchema(ma.Schema):
+    class Meta:
+        fields = ('id','title','budget','amount_paid','start_date','expected_due','actual_due','created_on','last_update', 'budget_items')
+        
+
+project_Schema = ProjectSchema()
+projects_Schema=ProjectSchema(many=True)
