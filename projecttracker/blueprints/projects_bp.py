@@ -1,7 +1,8 @@
-from ..models.project import Project, project_Schema, projects_Schema
+from ..models.project import Project
 from ..extensions import db
 from flask import Blueprint, jsonify,request
 from datetime import datetime
+from ..models.schemas import project_schema, projects_schema
 
 project_bp=Blueprint("project_bp",__name__, url_prefix='/projects')
 

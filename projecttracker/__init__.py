@@ -1,6 +1,7 @@
 from flask import Flask
 from .extensions import db, migrate, ma
 from .blueprints.projects_bp import project_bp
+from .models import *
 
 
 def create_app():
@@ -12,6 +13,7 @@ def create_app():
 
     db.init_app(app)
     migrate.init_app(app,db)
+    ma.init_app(app)
 
     app.register_blueprint(project_bp)
 
